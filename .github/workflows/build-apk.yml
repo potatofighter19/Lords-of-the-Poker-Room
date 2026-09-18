@@ -13,9 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Unpack project
-        run: unzip -o LordsOfThePokerRoomNative.zip
-
       - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
@@ -33,16 +30,15 @@ jobs:
           gradle-version: '8.9'
 
       - name: Build APK
-        working-directory: LordsOfThePokerRoomNative
         run: gradle --no-daemon assembleDebug
 
       - name: Rename APK
         run: |
           mkdir -p output
-          cp LordsOfThePokerRoomNative/app/build/outputs/apk/debug/app-debug.apk output/Lords-of-the-Poker-Room.apk
+          cp app/build/outputs/apk/debug/app-debug.apk output/Lords-of-the-Poker-Room.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Lords-of-the-Poker-Room
+          name: Lords-of-the-Poker-Room-Patch1
           path: output/Lords-of-the-Poker-Room.apk
