@@ -22,13 +22,10 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
+      - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Install Android SDK
-        run: |
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
-          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -42,11 +39,10 @@ jobs:
       - name: Rename APK
         run: |
           mkdir -p output
-          cp LordsOfThePokerRoomNative/app/build/outputs/apk/debug/app-debug.apk \
-             output/Lords-of-the-Poker-Room.apk
+          cp LordsOfThePokerRoomNative/app/build/outputs/apk/debug/app-debug.apk output/Lords-of-the-Poker-Room.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Lords-of-the-Poker-Room-APK
+          name: Lords-of-the-Poker-Room
           path: output/Lords-of-the-Poker-Room.apk
