@@ -1,0 +1,3 @@
+Native source validation: PASSED with Java stub compile.
+Android SDK build: requires Android SDK/Gradle toolchain or GitHub Actions.
+No WebView is used by the application source.
